@@ -26,6 +26,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+
 public class Main extends Application {
 
 	private static final long DURATION_SECONDS = 6;
@@ -39,8 +40,11 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		//create interesting UI for thid game
+		primaryStage.setTitle("Memory Game");
 		primaryStage.setScene(new Scene(createContent()));
 		primaryStage.show();
+
 	}
 
 	@Override
@@ -51,9 +55,25 @@ public class Main extends Application {
 	private Parent createContent() {
 		root = new VBox();
 		root.setPrefSize(1280, 720+100);
+		// create title for the game
+		var title = new Text("Memory Game");
+		title.setFont(Font.font(64));
+		title.setTranslateX(1280 / 2 - title.getLayoutBounds().getWidth() / 2);
+		title.setTranslateY(50);
+
+		// add title to the root
+		root.getChildren().add(title);
+
 
 		var button = new Button("Start");
 		button.setOnAction(e -> startGame());
+		// make start button more UI friendly
+		button.setPrefSize(100, 50);
+		button.setTranslateX(1280 / 2 - 50);
+		button.setTranslateY(720 / 2 - 25);
+		// make button more beautiful
+		button.setStyle("-fx-background-color: #000000; -fx-text-fill: #ffffff; -fx-font-size: 20px; -fx-font-weight: bold;");
+
 
 		root.getChildren().addAll(new Pane(), button);
 
@@ -79,7 +99,7 @@ public class Main extends Application {
 		Random random = new Random();
 
 		List<Point2D> usePoints = new ArrayList<>();
-		for(int i = 1; i <= 9; i++){
+		for(int i = 1; i <= 5; i++){
 			int randomX = random.nextInt(1280 / 80);
 			int randomY = random.nextInt(720 / 80);
 
