@@ -80,8 +80,13 @@ public class Main extends Application {
 		return root;
 	}
 
+
+
+
+	private int numTiles = 3; // Initial number of tiles
+
 	private void startGame(){
-		tilePane = populateGrid();
+		tilePane = populateGrid(numTiles);
 		root.getChildren().set(0, tilePane);
 		timerThread.schedule(() -> {
 			tilePane.getChildren()
@@ -90,59 +95,107 @@ public class Main extends Application {
 					.forEach(TileView::hide);
 
 		}, DURATION_SECONDS, TimeUnit.SECONDS);
+
+		// Increase the number of tiles for the next round
+		numTiles++;
 	}
 
-	private Pane populateGrid(){
-		var pane = new Pane();
-		pane.setPrefSize(1280, 720);
+	private void checkGameOver(){
+		if(tileSequence.size() == 0){
+			// make Won page when player finish the game
+			tilePane.getChildren().clear();
+			var text = new Text("You Won");
+			text.setFont(Font.font(64));
+			text.setTranslateX(1280 / 2 - text.getLayoutBounds().getWidth() / 2);
+			text.setTranslateY(720 / 2 - text.getLayoutBounds().getHeight() / 2);
+			tilePane.getChildren().add(text);
+			System.out.println("You Won");
+			// Start a new game with more tiles
+			startGame();
+		}
+	}
 
-		Random random = new Random();
 
-		List<Point2D> usePoints = new ArrayList<>();
-		for(int i = 1; i <= 5; i++){
-			int randomX = random.nextInt(1280 / 80);
-			int randomY = random.nextInt(720 / 80);
 
-			Point2D p = new Point2D(randomX, randomY);
+private Pane populateGrid(int numTiles){
+	var pane = new Pane();
+	pane.setPrefSize(1280, 720);
 
-			while(usePoints.contains(p)){
-				randomX = random.nextInt(1280 / 80);
-				randomY = random.nextInt(720 / 80);
+	Random random = new Random();
 
-				p = new Point2D(randomX, randomY);
-			}
+	List<Point2D> usePoints = new ArrayList<>();
 
-			usePoints.add(p);
+	for(int i = 1; i <= numTiles; i++){
+		int randomX = random.nextInt(1280 / 80);
+		int randomY = random.nextInt(720 / 80);
 
-			var tile = new TileView(Integer.toString(i));
-			tile.setTranslateX(randomX * 80);
-			tile.setTranslateY(randomY * 80);
-			tile.setOnMouseClicked(e -> {
-				if(tileSequence.isEmpty()){
-					System.out.println("You Won");
-					return;
-				}
+		Point2D p = new Point2D(randomX, randomY);
 
-				var correctTile = tileSequence.remove(0);
-				if(tile == correctTile){
-					tile.show();
-				}else {
-					tileSequence.clear();
-					System.out.println("Game over");
+		while(usePoints.contains(p)){
+			randomX = random.nextInt(1280 / 80);
+			randomY = random.nextInt(720 / 80);
 
-					Platform.exit();
-					System.exit(0);
-
-				}
-			});
-
-			pane.getChildren().add(tile);
-			tileSequence.add(tile);
-
+			p = new Point2D(randomX, randomY);
 		}
 
-		return pane;
+		usePoints.add(p);
+
+		var tile = new TileView(Integer.toString(i));
+		tile.setTranslateX(randomX * 80);
+		tile.setTranslateY(randomY * 80);
+		tile.setOnMouseClicked(e -> {
+			if(tileSequence.isEmpty()){
+				// make Won page when player finish the game
+				pane.getChildren().clear();
+				var text = new Text("You Won");
+				text.setFont(Font.font(64));
+				text.setTranslateX(1280 / 2 - text.getLayoutBounds().getWidth() / 2);
+				text.setTranslateY(720 / 2 - text.getLayoutBounds().getHeight() / 2);
+				pane.getChildren().add(text);
+				System.out.println("You Won");
+				// Start a new game with more tiles
+				startGame();
+				return;
+			}
+
+			var correctTile = tileSequence.remove(0);
+			if(tile == correctTile){
+				tile.show();
+
+				checkGameOver();
+			}else {
+				// make Game over page when player lose the game
+				pane.getChildren().clear();
+				var text = new Text("Game Over");
+				var bestScore = new Text("Best score: " + numTiles);
+				text.setFont(Font.font(64));
+				text.setTranslateX(1280 / 2 - text.getLayoutBounds().getWidth() / 2);
+				text.setTranslateY(720 / 2 - text.getLayoutBounds().getHeight() / 2);
+				pane.getChildren().addAll(text, bestScore);
+
+
+
+				tileSequence.clear();
+				System.out.println("Game over");
+				// show best score
+				System.out.println("Best score: " + numTiles);
+				// show game over page for 3 seconds then close the game
+					timerThread.schedule(() -> {
+					Platform.exit();
+					System.exit(0);
+				}, 3, TimeUnit.SECONDS);
+
+			}
+		});
+
+		pane.getChildren().add(tile);
+		tileSequence.add(tile);
+
 	}
+
+	return pane;
+}
+
 
 	private static class TileView extends StackPane {
 
