@@ -98,21 +98,17 @@ public class Main extends Application {
 	private void startGame(){
 		tilePane = populateGrid(numTiles);
 		root.getChildren().set(0, tilePane);
-		root.getChildren().set(1, countDownPane());
-		timerThread.schedule(() -> {
-			tilePane.getChildren()
-					.stream()
-					.map(n -> (TileView) n)
-					.forEach(TileView::hide);
 
-		}, DURATION_SECONDS, TimeUnit.SECONDS);
+
+
+
 
 		// Increase the number of tiles for the next round
 		numTiles++;
 	}
 
 	private void checkGameOver(){
-		if(tileSequence.size() == 0){
+		if(tileSequence.isEmpty()){
 			// make Won page when player finish the game
 			tilePane.getChildren().clear();
 			var text = new Text("You Won");
@@ -122,55 +118,56 @@ public class Main extends Application {
 			tilePane.getChildren().add(text);
 			System.out.println("You Won");
 			// Start a new game with more tiles
-			timerThread.schedule(this::startGame, 3, TimeUnit.SECONDS);
-
+//			timerThread.schedule(this::startGame, 3, TimeUnit.SECONDS);
+			startGame();
 		}
 	}
 
-	public Pane countDownPane() {
-		// Create a pane to hold the countdown components
-		Pane pane = new Pane();
-
-		// Create a label to display the countdown numbers
-		Label countdownLabel = new Label(DURATION_SECONDS+"");
-
-		countdownLabel.setStyle("-fx-font-size: 30px;"); // Style the label as desired
-		countdownLabel.setLayoutX(50);
-		countdownLabel.setLayoutY(50);
-
-		// Add the label to the pane
-		pane.getChildren().add(countdownLabel);
-
-		// Create a timeline for the countdown
-		Timeline countdown = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
-			// Get the current number from the label
-			int currentNumber = Integer.parseInt(countdownLabel.getText());
-
-			// Update the countdown label
-			if (currentNumber > 1) {
-				countdownLabel.setText(String.valueOf(currentNumber - 1));
-			} else {
-				countdownLabel.setText("GO!");
-				// Stop the timeline when the countdown reaches "GO!"
-
-				// You can add additional actions here when the countdown reaches zero
-			}
-		}));
-
-		// Set the cycle count to 3, so the timeline runs for 3 seconds (3 cycles)
-		countdown.setCycleCount(6);
-
-		// Start the countdown timeline
-		countdown.play();
-
-		// Return the pane with the countdown
-		return pane;
-	}
-
-
+//	public Pane countDownPane() {
+//		// Create a pane to hold the countdown components
+//		Pane pane = new Pane();
+//
+//		// Create a label to display the countdown numbers
+//		Label countdownLabel = new Label(DURATION_SECONDS+"");
+//
+//		countdownLabel.setStyle("-fx-font-size: 30px;"); // Style the label as desired
+//		countdownLabel.setLayoutX(50);
+//		countdownLabel.setLayoutY(50);
+//
+//		// Add the label to the pane
+//		pane.getChildren().add(countdownLabel);
+//
+//		// Create a timeline for the countdown
+//		Timeline countdown = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
+//			// Get the current number from the label
+//			int currentNumber = Integer.parseInt(countdownLabel.getText());
+//
+//			// Update the countdown label
+//			if (currentNumber > 1) {
+//				countdownLabel.setText(String.valueOf(currentNumber - 1));
+//			} else {
+//				countdownLabel.setText("GO!");
+//				// Stop the timeline when the countdown reaches "GO!"
+//
+//				// You can add additional actions here when the countdown reaches zero
+//			}
+//		}));
+//
+//		// Set the cycle count to 3, so the timeline runs for 3 seconds (3 cycles)
+//		countdown.setCycleCount(6);
+//
+//		// Start the countdown timeline
+//		countdown.play();
+//
+//		// Return the pane with the countdown
+//		return pane;
+//	}
 
 
+
+	private int sequence = 1;
 	private Pane populateGrid(int numTiles){
+		sequence = 1;
 		var pane = new Pane();
 		pane.setPrefSize(1280, 720);
 
@@ -213,7 +210,18 @@ public class Main extends Application {
 
 				var correctTile = tileSequence.remove(0);
 				if(tile == correctTile){
+					if(sequence == 1){
+						//hide all
+						tilePane.getChildren()
+								.stream()
+								.map(n -> (TileView) n)
+								.forEach(TileView::hide);
+					}
 					tile.show();
+					sequence++;
+
+
+
 
 					checkGameOver();
 				}else {
