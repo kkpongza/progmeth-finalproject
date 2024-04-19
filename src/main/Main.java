@@ -10,9 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeType;
@@ -115,17 +113,46 @@ public class Main extends Application {
 		if(tileSequence.size() == 0){
 			// make Won page when player finish the game
 			tilePane.getChildren().clear();
-			var text = new Text("You Won");
+			var text = new Text("Current Level : " + (numTiles-1));
 			text.setFont(Font.font(64));
 			text.setTranslateX(1280 / 2 - text.getLayoutBounds().getWidth() / 2);
 			text.setTranslateY(720 / 2 - text.getLayoutBounds().getHeight() / 2);
 			tilePane.getChildren().add(text);
 			System.out.println("You Won");
-			// Start a new game with more tiles
-			timerThread.schedule(this::startGame, 3, TimeUnit.SECONDS);
 
+
+			var newGameButton = new Button("continute");
+			var ExitButton = new Button("Exit");
+			ExitButton.setOnAction(e -> {
+				Platform.exit();
+				System.exit(0);
+			});
+			ExitButton.setPrefSize(120, 50);
+			ExitButton.setTranslateX(1280 / 2 - 50);
+			ExitButton.setTranslateY(720 / 2 + 100);
+			ExitButton.setStyle("-fx-background-color: #000000; -fx-text-fill: #ffffff; -fx-font-size: 20px; -fx-font-weight: bold;");
+			tilePane.getChildren().add(ExitButton);
+
+
+
+
+			newGameButton.setOnAction(e -> {
+				startGame();
+			});
+			newGameButton.setPrefSize(120, 50);
+			newGameButton.setTranslateX(1280 / 2 - 50);
+			newGameButton.setTranslateY(720 / 2 + 50);
+			newGameButton.setStyle("-fx-background-color: #000000; -fx-text-fill: #ffffff; -fx-font-size: 20px; -fx-font-weight: bold;");
+			tilePane.getChildren().add(newGameButton);
+
+
+			// show you won page for 3 seconds before starting a new game with more tiles
+//			timerThread.schedule(() -> {
+//				Platform.runLater(() -> startGame());
+//			}, 3, TimeUnit.SECONDS);
 		}
 	}
+
 
 	public Pane countDownPane() {
 		// Create a pane to hold the countdown components
