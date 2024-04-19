@@ -105,27 +105,20 @@ public class Main extends Application {
 		numTiles++;
 	}
 
-	private void checkGameOver(){
-		if(tileSequence.isEmpty()){
+
+	private void checkGameOver() {
+		if (tileSequence.isEmpty()) {
 			// make Won page when player finish the game
 			tilePane.getChildren().clear();
-			var text = new Text("Current Level : " + (numTiles-1));
+			var text = new Text("Current Level : " + (numTiles - 1));
 			text.setFont(Font.font(64));
 			text.setTranslateX(1280 / 2 - text.getLayoutBounds().getWidth() / 2);
 			text.setTranslateY(720 / 2 - text.getLayoutBounds().getHeight() / 2);
 			tilePane.getChildren().add(text);
 			System.out.println("You Won");
-			// Start a new game with more tiles
-//			timerThread.schedule(this::startGame, 3, TimeUnit.SECONDS);
-			startGame();
-
-			// Start a new game with more tiles
-			timerThread.schedule(this::startGame, 3, TimeUnit.SECONDS);
 
 
-
-
-			var newGameButton = new Button("continute");
+			var newGameButton = new Button("continue");
 			var ExitButton = new Button("Exit");
 			ExitButton.setOnAction(e -> {
 				Platform.exit();
@@ -137,9 +130,6 @@ public class Main extends Application {
 			ExitButton.setStyle("-fx-background-color: #000000; -fx-text-fill: #ffffff; -fx-font-size: 20px; -fx-font-weight: bold;");
 			tilePane.getChildren().add(ExitButton);
 
-
-
-
 			newGameButton.setOnAction(e -> {
 				startGame();
 			});
@@ -149,14 +139,9 @@ public class Main extends Application {
 			newGameButton.setStyle("-fx-background-color: #000000; -fx-text-fill: #ffffff; -fx-font-size: 20px; -fx-font-weight: bold;");
 			tilePane.getChildren().add(newGameButton);
 
-
-			// show you won page for 3 seconds before starting a new game with more tiles
-//			timerThread.schedule(() -> {
-//				Platform.runLater(() -> startGame());
-//			}, 3, TimeUnit.SECONDS);
-
 		}
 	}
+
 
 
 //	public Pane countDownPane() {
