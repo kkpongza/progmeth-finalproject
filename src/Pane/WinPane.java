@@ -28,7 +28,7 @@ public class WinPane extends Pane {
         });
         ExitButton.setPrefSize(120, 50);
         ExitButton.setTranslateX(1280 / 2 - 50);
-        ExitButton.setTranslateY(720 / 2 + 100);
+        ExitButton.setTranslateY(720 / 2 + 150);
         ExitButton.setStyle("-fx-background-color: #000000; -fx-text-fill: #ffffff; -fx-font-size: 20px; -fx-font-weight: bold;");
         this.getChildren().add(ExitButton);
 

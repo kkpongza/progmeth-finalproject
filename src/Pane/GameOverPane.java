@@ -34,38 +34,44 @@ public class GameOverPane extends Pane {
 
         remainingLife = RootPane.getRootPane().getLife() - 1;
         RootPane.getRootPane().setLife(remainingLife);
-        updateLifeText();
-
-//        lifeText = new Text("Remaining Life: " + remainingLife);
-//        lifeText.setFont(Font.font(32)); // Font size of 32
-//        lifeText.setTranslateX(1280 / 2 - lifeText.getLayoutBounds().getWidth() / 2);
-//        lifeText.setTranslateY(720 / 2 + 100); // Position it below the best score text
-//        this.getChildren().add(lifeText);
-
-        // Add continue button
-        continueButton = new Button("Continue");
-        continueButton.setOnAction(e -> continueGame());
-        continueButton.setPrefSize(120, 50);
-        continueButton.setTranslateX(1280 / 2 - 60); // Centered below best score text
-        continueButton.setTranslateY(720 / 2 + 150); // Below best score text
-        continueButton.setStyle("-fx-background-color: #000000; -fx-text-fill: #ffffff; -fx-font-size: 20px; -fx-font-weight: bold;");
-        this.getChildren().add(continueButton);
+        if(remainingLife != 0){
+            updateLifeText();
+        }else {
+            Text text = new Text("You're dead!");
+            text.setFont(Font.font(32)); // Font size of 32
+            text.setTranslateX(1280 / 2 - text.getLayoutBounds().getWidth() / 2);
+            text.setTranslateY(720 / 2 + 125); // Position it below the game over text
+            this.getChildren().add(text);
+        }
 
         // Add restart button
         restartButton = new Button("Restart");
         restartButton.setOnAction(e -> restartGame());
         restartButton.setPrefSize(120, 50);
-        restartButton.setTranslateX(continueButton.getTranslateX() - 140); // Left of continue button
-        restartButton.setTranslateY(continueButton.getTranslateY());
+        restartButton.setTranslateX(1280 / 2 - 60); // Left of continue button
+        restartButton.setTranslateY(720 / 2 + 170);
         restartButton.setStyle("-fx-background-color: #000000; -fx-text-fill: #ffffff; -fx-font-size: 20px; -fx-font-weight: bold;");
         this.getChildren().add(restartButton);
+
+
+        // Add continue button
+        if(remainingLife != 0){
+            continueButton = new Button("Continue");
+            continueButton.setOnAction(e -> continueGame());
+            continueButton.setPrefSize(120, 50);
+            continueButton.setTranslateX(restartButton.getTranslateX() - 140); // Centered below best score text
+            continueButton.setTranslateY(restartButton.getTranslateY()); // Below best score text
+            continueButton.setStyle("-fx-background-color: #000000; -fx-text-fill: #ffffff; -fx-font-size: 20px; -fx-font-weight: bold;");
+            this.getChildren().add(continueButton);
+        }
+
 
         // Add exit button
         exitButton = new Button("Exit");
         exitButton.setOnAction(e -> exitGame());
         exitButton.setPrefSize(120, 50);
-        exitButton.setTranslateX(continueButton.getTranslateX() + 140); // Right of continue button
-        exitButton.setTranslateY(continueButton.getTranslateY());
+        exitButton.setTranslateX(remainingLife != 0? restartButton.getTranslateX() + 140 : restartButton.getTranslateX()); // Right of continue button
+        exitButton.setTranslateY(remainingLife != 0? restartButton.getTranslateY() : restartButton.getTranslateY() +75);
         exitButton.setStyle("-fx-background-color: #000000; -fx-text-fill: #ffffff; -fx-font-size: 20px; -fx-font-weight: bold;");
         this.getChildren().add(exitButton);
     }
