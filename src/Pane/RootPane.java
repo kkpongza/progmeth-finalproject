@@ -13,7 +13,7 @@ public class RootPane extends VBox {
     public RootPane(){
         this.setPrefSize(1280, 720+100);
 
-        var title = new Text("Memory Game");
+        var title = new Text("Blind Memory");
         title.setFont(Font.font(64));
         title.setTranslateX((double) 1280 / 2 - title.getLayoutBounds().getWidth() / 2);
         title.setTranslateY(50);

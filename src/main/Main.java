@@ -11,7 +11,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		RootPane rootPane = RootPane.getRootPane();
-		primaryStage.setTitle("Memory Game");
+		primaryStage.setTitle("Blind Memory");
 		primaryStage.setScene(new Scene(rootPane));
 		primaryStage.show();
 	}

@@ -8,16 +8,11 @@ import javafx.scene.layout.Pane;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
 
 public class PlayPane extends Pane {
     private List<TileView> tileSequence = new ArrayList<>();
 
     private int sequence = 1;
-
-    private ScheduledExecutorService timerThread
-            = Executors.newSingleThreadScheduledExecutor();
 
     public PlayPane(int numTiles){
 

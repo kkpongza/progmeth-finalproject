@@ -19,7 +19,7 @@ public class WinPane extends Pane {
         System.out.println("You Won");
 
 
-        var continueButton = new Button("continue");
+
         var ExitButton = new Button("Exit");
         ExitButton.setOnAction(e -> {
             handleExitButton();
@@ -30,6 +30,7 @@ public class WinPane extends Pane {
         ExitButton.setStyle("-fx-background-color: #000000; -fx-text-fill: #ffffff; -fx-font-size: 20px; -fx-font-weight: bold;");
         this.getChildren().add(ExitButton);
 
+        var continueButton = new Button("continue");
         continueButton.setOnAction(e -> {
             handleContinueButton();
         });
