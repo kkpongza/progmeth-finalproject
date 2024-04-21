@@ -79,4 +79,20 @@ public class PlayPane extends Pane {
 
         }
     }
+
+    public List<TileView> getTileSequence() {
+        return tileSequence;
+    }
+
+    public void setTileSequence(List<TileView> tileSequence) {
+        this.tileSequence = tileSequence;
+    }
+
+    public int getSequence() {
+        return sequence;
+    }
+
+    public void setSequence(int sequence) {
+        this.sequence = sequence;
+    }
 }

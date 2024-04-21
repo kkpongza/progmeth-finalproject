@@ -1,0 +1,59 @@
+@startuml
+class Pane.GameOverPane {
+- Text gameOverText
+- Text bestScoreText
+- Button continueButton
+- Button restartButton
+- Button exitButton
+- Text lifeText
+- int level
+- int remainingLife
++ <<Create>> GameOverPane(int)
+- void restartGame()
+- void continueGame()
+- void exitGame()
+- void updateLifeText()
+}
+class Pane.PlayPane {
+- List<TileView> tileSequence
+- int sequence
++ <<Create>> PlayPane(int)
+}
+class main.Main {
++ void start(Stage)
++ {static} void main(String[])
+}
+class Pane.WinPane {
+- int level
++ <<Create>> WinPane(int)
+- void handleContinueButton()
+- void handleExitButton()
+}
+class Pane.RootPane {
+- {static} RootPane instance
+- int numTiles
+- int life
+- Text lifeText
++ <<Create>> RootPane()
++ {static} RootPane getRootPane()
+- void clear()
+- void startGame()
+- void updateLifeText()
++ int getLife()
++ void setLife(int)
+}
+class Pane.TileView {
+- Text text
++ <<Create>> TileView(String)
++ void hide()
++ void show()
+}
+
+
+javafx.scene.layout.Pane <|-- Pane.GameOverPane
+javafx.scene.layout.Pane <|-- Pane.PlayPane
+javafx.application.Application <|-- main.Main
+javafx.scene.layout.Pane <|-- Pane.WinPane
+javafx.scene.layout.VBox <|-- Pane.RootPane
+javafx.scene.layout.StackPane <|-- Pane.TileView
+@enduml
