@@ -38,6 +38,8 @@ import java.util.concurrent.TimeUnit;
 public class Main extends Application {
 
 	private static final long DURATION_SECONDS = 6;
+	private int numTiles = 3; // Initial number of tiles
+	private int lives = 3; // Initial number of lives
 
 	private ScheduledExecutorService timerThread
 			= Executors.newSingleThreadScheduledExecutor();
@@ -91,7 +93,7 @@ public class Main extends Application {
 
 
 
-	private int numTiles = 3; // Initial number of tiles
+
 
 	private void startGame(){
 		tilePane = populateGrid(numTiles);
