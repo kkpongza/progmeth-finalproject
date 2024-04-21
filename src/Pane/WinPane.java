@@ -1,13 +1,11 @@
 package Pane;
 
-import javafx.application.Platform;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 public class WinPane extends Pane {
-    RootPane rootPane;
 
     private int level;
 
