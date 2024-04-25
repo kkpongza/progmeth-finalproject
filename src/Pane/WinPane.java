@@ -1,13 +1,11 @@
 package Pane;
 
-import javafx.application.Platform;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 public class WinPane extends Pane {
-    RootPane rootPane;
 
     private int level;
 
@@ -28,7 +26,7 @@ public class WinPane extends Pane {
         System.out.println("You Won");
 
 
-        var continueButton = new Button("continue");
+
         var ExitButton = new Button("Exit");
         ExitButton.setOnAction(e -> {
             handleExitButton();
@@ -39,6 +37,7 @@ public class WinPane extends Pane {
         ExitButton.setStyle("-fx-background-color: #000000; -fx-text-fill: #ffffff; -fx-font-size: 20px; -fx-font-weight: bold;");
         this.getChildren().add(ExitButton);
 
+        var continueButton = new Button("continue");
         continueButton.setOnAction(e -> {
             handleContinueButton();
         });

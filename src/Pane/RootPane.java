@@ -1,7 +1,6 @@
 package Pane;
 
 import javafx.scene.control.Button;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -20,23 +19,21 @@ public class RootPane extends VBox {
     }
     public RootPane(){
         this.setPrefSize(1280, 720+100);
-        var title = new Text("Memory Game");
+
+        var title = new Text("Blind Memory");
         title.setFont(Font.font(64));
         title.setTranslateX((double) 1280 / 2 - title.getLayoutBounds().getWidth() / 2);
         title.setTranslateY(50);
-
-        // add title to the root
         this.getChildren().add(title);
 
-        // Create a Text element to display the number of lives
-//        lifeText = new Text("Lives: " + life);
-//        lifeText.setFont(Font.font(20)); // Set the font size to 20
-//        lifeText.setTranslateX(10); // Position it on the left side
-//        lifeText.setTranslateY(80); // Position it below the title
-//        this.getChildren().add(lifeText);
+        Text tutorial = new Text("Match pairs of cards in order to reveal numbers, use 3 lives wisely");
+        tutorial.setFont(new Font(20));
+        tutorial.setTranslateX((1280 - tutorial.getLayoutBounds().getWidth()) / 2);
+        tutorial.setTranslateY(120);
+        this.getChildren().add(tutorial);
+
         updateLifeText();
 
-        //add this button in Goto class
         var button = new Button("Start");
         button.setOnAction(e -> {
             startGame();
@@ -45,9 +42,7 @@ public class RootPane extends VBox {
         button.setTranslateX(1280 / 2 - 50);
         button.setTranslateY(720 / 2 - 100);
         button.setStyle("-fx-background-color: #000000; -fx-text-fill: #ffffff; -fx-font-size: 20px; -fx-font-weight: bold;");
-
-
-        this.getChildren().addAll(new Pane(), button);
+        this.getChildren().add(button);
     }
 
     public static RootPane getRootPane(){
@@ -71,6 +66,7 @@ public class RootPane extends VBox {
         instance.getChildren().set(0, playPane);
         numTiles++;
     }
+
     private void updateLifeText() {
         if (lifeText != null) {
             // Remove the previous life text if it exists
@@ -80,12 +76,9 @@ public class RootPane extends VBox {
         // Display the remaining lives as hearts
         String hearts = "\u2764".repeat(life);
         lifeText = new Text("Lives: " + hearts);
-        lifeText.setFont(Font.font(32)); // Set the font size to 20
-
-        lifeText.setTranslateX((double) 1280 / 2 - lifeText.getLayoutBounds().getWidth() / 2); // Position it on the left side
-        lifeText.setTranslateY(100); // Position it below the title
-
-        // Add the life text to the pane
+        lifeText.setFont(Font.font(32));
+        lifeText.setTranslateX((double) 1280 / 2 - lifeText.getLayoutBounds().getWidth() / 2);
+        lifeText.setTranslateY(150);
         this.getChildren().add(lifeText);
     }
 

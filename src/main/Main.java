@@ -1,13 +1,8 @@
 package main;
 
-
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.geometry.Point2D;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
+<<<<<<< HEAD
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
@@ -18,7 +13,19 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeType;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+||||||| 7df99ae
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.StrokeType;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+=======
+>>>>>>> 96dd6ce8b5e7f88d31282149b3b7b44667431358
 import javafx.stage.Stage;
+<<<<<<< HEAD
 import javafx.util.Duration;
 
 import javafx.animation.KeyFrame;
@@ -37,6 +44,26 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+||||||| 7df99ae
+import javafx.util.Duration;
+
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.application.Platform;
+import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
+import javafx.util.Duration;
+
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
+=======
+>>>>>>> 96dd6ce8b5e7f88d31282149b3b7b44667431358
 import Pane.RootPane;
 
 
@@ -52,7 +79,7 @@ public class Main extends Application {
 		mediaPlayer.setAutoPlay(true);
 		mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 		RootPane rootPane = RootPane.getRootPane();
-		primaryStage.setTitle("Memory Game");
+		primaryStage.setTitle("Blind Memory");
 		primaryStage.setScene(new Scene(rootPane));
 		primaryStage.show();
 	}
