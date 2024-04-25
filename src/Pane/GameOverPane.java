@@ -16,6 +16,15 @@ public class GameOverPane extends Pane {
     private int level;
     private int remainingLife;
 
+
+
+    public void playClick(){
+        new Thread(() -> {
+            Sound sound = new Sound("src/music/maincc.MP3");
+            sound.setVolume(20);
+            sound.play();
+        }).start();
+    }
     public GameOverPane(int numTiles) {
         level = numTiles;
         // Set up the game over text
@@ -46,7 +55,11 @@ public class GameOverPane extends Pane {
 
         // Add restart button
         restartButton = new Button("Restart");
-        restartButton.setOnAction(e -> restartGame());
+        restartButton.setOnAction(e -> {
+//            playClick();
+            restartGame();
+
+        });
         restartButton.setPrefSize(120, 50);
         restartButton.setTranslateX(1280 / 2 - 60); // Left of continue button
         restartButton.setTranslateY(720 / 2 + 170);
@@ -57,7 +70,10 @@ public class GameOverPane extends Pane {
         // Add continue button
         if(remainingLife != 0){
             continueButton = new Button("Continue");
-            continueButton.setOnAction(e -> continueGame());
+            continueButton.setOnAction(e -> {
+
+                continueGame();
+            });
             continueButton.setPrefSize(120, 50);
             continueButton.setTranslateX(restartButton.getTranslateX() - 140); // Centered below best score text
             continueButton.setTranslateY(restartButton.getTranslateY()); // Below best score text
@@ -68,7 +84,11 @@ public class GameOverPane extends Pane {
 
         // Add exit button
         exitButton = new Button("Exit");
-        exitButton.setOnAction(e -> exitGame());
+        exitButton.setOnAction(e -> {
+//            playClick();
+            restartGame();
+
+        });
         exitButton.setPrefSize(120, 50);
         exitButton.setTranslateX(remainingLife != 0? restartButton.getTranslateX() + 140 : restartButton.getTranslateX()); // Right of continue button
         exitButton.setTranslateY(remainingLife != 0? restartButton.getTranslateY() : restartButton.getTranslateY() +75);
@@ -77,6 +97,7 @@ public class GameOverPane extends Pane {
     }
 
     private void restartGame() {
+        playClick();
         // Implement the logic to restart the game
         RootPane.getRootPane().getChildren().clear();
         RootPane rootPane = new RootPane();
@@ -84,12 +105,14 @@ public class GameOverPane extends Pane {
     }
 
     private void continueGame(){
+        playClick();
         RootPane.getRootPane().getChildren().clear();
         PlayPane playPane = new PlayPane(level);
         RootPane.getRootPane().getChildren().add(playPane);
     }
 
     private void exitGame() {
+        playClick();
         Platform.exit();
         System.exit(0);
     }

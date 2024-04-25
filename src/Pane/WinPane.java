@@ -11,6 +11,13 @@ public class WinPane extends Pane {
 
     private int level;
 
+    public void playClick(){
+        new Thread(() -> {
+            Sound sound = new Sound("src/music/maincc.MP3");
+            sound.setVolume(20);
+            sound.play();
+        }).start();
+    }
     public WinPane(int numTiles) {
         level = numTiles;
         var text = new Text("Current Level : " + level);
@@ -45,12 +52,14 @@ public class WinPane extends Pane {
     }
 
     private void handleContinueButton(){
+        playClick();
         PlayPane playPane = new PlayPane(level + 1);
         RootPane.getRootPane().getChildren().clear();
         RootPane.getRootPane().getChildren().add(playPane);
     }
 
     private void handleExitButton(){
+        playClick();
         RootPane.getRootPane().getChildren().clear();
         RootPane rootPane = new RootPane();
         RootPane.getRootPane().getChildren().add(rootPane);

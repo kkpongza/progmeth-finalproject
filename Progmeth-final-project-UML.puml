@@ -1,0 +1,70 @@
+@startuml
+class Pane.TileView {
+- Text text
++ <<Create>> TileView(String)
++ void hide()
++ void show()
+}
+class Pane.PlayPane {
+- Pane tilePane
+- List<TileView> tileSequence
+- int sequence
+- ScheduledExecutorService timerThread
++ <<Create>> PlayPane(int)
++ Pane getTilePane()
++ void setTilePane(Pane)
++ List<TileView> getTileSequence()
++ void setTileSequence(List<TileView>)
++ int getSequence()
++ void setSequence(int)
++ ScheduledExecutorService getTimerThread()
++ void setTimerThread(ScheduledExecutorService)
+}
+class Pane.RootPane {
+- {static} RootPane instance
+- int numTiles
+- int life
+- Text lifeText
++ <<Create>> RootPane()
++ {static} RootPane getRootPane()
+- void clear()
+- void startGame()
+- void updateLifeText()
++ int getLife()
++ void setLife(int)
+}
+class main.Main {
++ void start(Stage)
++ {static} void main(String[])
+}
+class Pane.GameOverPane {
+- Text gameOverText
+- Text bestScoreText
+- Button continueButton
+- Button restartButton
+- Button exitButton
+- Text lifeText
+- int level
+- int remainingLife
++ <<Create>> GameOverPane(int)
+- void restartGame()
+- void continueGame()
+- void exitGame()
+- void updateLifeText()
+}
+class Pane.WinPane {
+~ RootPane rootPane
+- int level
++ <<Create>> WinPane(int)
+- void handleContinueButton()
+- void handleExitButton()
+}
+
+
+javafx.scene.layout.StackPane <|-- Pane.TileView
+javafx.scene.layout.Pane <|-- Pane.PlayPane
+javafx.scene.layout.VBox <|-- Pane.RootPane
+javafx.application.Application <|-- main.Main
+javafx.scene.layout.Pane <|-- Pane.GameOverPane
+javafx.scene.layout.Pane <|-- Pane.WinPane
+@enduml

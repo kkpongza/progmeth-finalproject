@@ -86,6 +86,13 @@ public class PlayPane extends Pane {
             tile.setTranslateX(randomX * 80);
             tile.setTranslateY(randomY * 80);
             tile.setOnMouseClicked(e -> {
+
+                new Thread(() -> {
+                    Sound sound = new Sound("src/music/0425.MP3");
+                    sound.setVolume(20);
+                    sound.play();
+                }).start();
+
                 var correctTile = tileSequence.remove(0);
 
                 if(tileSequence.isEmpty()){

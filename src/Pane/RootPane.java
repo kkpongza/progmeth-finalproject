@@ -11,6 +11,13 @@ public class RootPane extends VBox {
     private int numTiles = 3;
     private int life  = 3;
     private Text lifeText;
+    public void playClick(){
+        new Thread(() -> {
+            Sound sound = new Sound("src/music/maincc.MP3");
+            sound.setVolume(20);
+            sound.play();
+        }).start();
+    }
     public RootPane(){
         this.setPrefSize(1280, 720+100);
         var title = new Text("Memory Game");
@@ -31,7 +38,9 @@ public class RootPane extends VBox {
 
         //add this button in Goto class
         var button = new Button("Start");
-        button.setOnAction(e -> startGame());
+        button.setOnAction(e -> {
+            startGame();
+            playClick();});
         button.setPrefSize(100, 50);
         button.setTranslateX(1280 / 2 - 50);
         button.setTranslateY(720 / 2 - 100);
