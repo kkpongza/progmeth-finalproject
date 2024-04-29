@@ -2,7 +2,7 @@ package main;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
-<<<<<<< HEAD
+
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
@@ -13,7 +13,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeType;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-||||||| 7df99ae
+
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
@@ -22,10 +22,10 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeType;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-=======
->>>>>>> 96dd6ce8b5e7f88d31282149b3b7b44667431358
+
+
 import javafx.stage.Stage;
-<<<<<<< HEAD
+
 import javafx.util.Duration;
 
 import javafx.animation.KeyFrame;
@@ -44,7 +44,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-||||||| 7df99ae
 import javafx.util.Duration;
 
 import javafx.animation.KeyFrame;
@@ -62,8 +61,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-=======
->>>>>>> 96dd6ce8b5e7f88d31282149b3b7b44667431358
+
 import Pane.RootPane;
 
 
